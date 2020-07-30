@@ -1,5 +1,5 @@
 const state = {
-  messages: [],
+  messages: ['hola', 'que', 'tal'],
 
 }
 
@@ -14,7 +14,7 @@ const mutations = {
 const actions = {
 
   removeLastMessage({ dispatch, state }) {
-    
+
   },
 
 }
