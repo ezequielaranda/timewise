@@ -1,5 +1,5 @@
 const state = {
-  messages: ['hola', 'que', 'tal'],
+  messages: [],
 
 }
 
@@ -9,6 +9,16 @@ const mutations = {
     state.messages = messages
   },
 
+  addMessage (state, message) {
+    state.message.push(
+      {
+        id: '_' + Math.random().toString(36).substr(2, 9),
+        text: message,
+        viewed: false
+      }
+    )
+  }
+
 }
 
 const actions = {
@@ -16,6 +26,10 @@ const actions = {
   removeLastMessage({ dispatch, state }) {
 
   },
+
+  addMessage({commit, state}, message) {
+    commit('addMessage', message)
+  }
 
 }
 
