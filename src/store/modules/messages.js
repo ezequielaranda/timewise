@@ -10,7 +10,6 @@ const mutations = {
   },
 
   addMessage (state, message) {
-    console.log(message)
     state.messages.push(
       {
         id: '_' + Math.random().toString(36).substr(2, 9),

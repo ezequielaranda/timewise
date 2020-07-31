@@ -5,39 +5,43 @@ const state = {
 
 const mutations = {
 
-  setImages (state, messages) {
-    state.messages = messages
-  },
-
-  addMessage (state, message) {
-    console.log(message)
-    state.messages.push(
-      {
+  setImages (state) {
+    const images = []
+    for (let index = 0; index < 2; index++) {
+      images.push({
         id: '_' + Math.random().toString(36).substr(2, 9),
-        text: message,
-        viewed: false
-      }
-    )
+        url: 'https://source.unsplash.com/800x800/',
+        messages: []
+      })
+    }
+    state.images = images
   },
 
-  removeMessage(state, idMessage) {
-    state.messages.splice(
-      state.messages.findIndex(
-        obj => obj.id === idMessage
-      ),
-      1)
+  addImage (state, image) {
+  },
+
+  removeImage(state, idImage) {
+
   }
 
 }
 
 const actions = {
 
-  removeMessage({ commit, state }, idMessage) {
-    commit('removeMessage', idMessage)
+  removeImage({ commit, state }, idImage) {
+    commit('removeImage', idImage)
   },
 
-  addMessage({commit, state}, message) {
-    commit('addMessage', message)
+  addImage({commit, state}, image) {
+    commit('addImage', image)
+  },
+
+  addMessageToImage({commit, state}, payload) {
+
+  },
+
+  setImages({ commit, state }) {
+    commit('setImages')
   }
 
 }
