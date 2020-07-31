@@ -1,11 +1,11 @@
 const state = {
-  messages: [],
+  images: [],
 
 }
 
 const mutations = {
 
-  setMessages (state, messages) {
+  setImages (state, messages) {
     state.messages = messages
   },
 

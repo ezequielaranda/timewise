@@ -6,6 +6,9 @@
         :key="`item-${i}`"
       >
         {{ item }}
+        <button @click="removeMessage(item.id)">
+          Remove
+        </button>
       </li>
     </ul>
   </div>
@@ -15,7 +18,7 @@
 
 <script>
 
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'MessageList',
@@ -24,6 +27,12 @@ export default {
     ...mapState('messages', [
       'messages'
     ]),
+  },
+
+  methods: {
+    ...mapActions({
+      'removeMessage': 'messages/removeMessage'
+    })      
   },
 
 }
