@@ -35,10 +35,9 @@ export default {
       this.addMessage(this.inputText)
     },
 
-    ...mapActions('messages', [
-      'addMessage'
-    ])
-    
+    ...mapActions({
+      'addMessage': 'messages/addMessage'
+    })      
   },
 }
 </script>

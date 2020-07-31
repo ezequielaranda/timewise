@@ -10,21 +10,30 @@ const mutations = {
   },
 
   addMessage (state, message) {
-    state.message.push(
+    console.log(message)
+    state.messages.push(
       {
         id: '_' + Math.random().toString(36).substr(2, 9),
         text: message,
         viewed: false
       }
     )
+  },
+
+  removeMessage(state, idMessage) {
+    state.messages.splice(
+      state.messages.findIndex(
+        obj => obj.id === idMessage
+      ),
+      1)
   }
 
 }
 
 const actions = {
 
-  removeLastMessage({ dispatch, state }) {
-
+  removeMessage({ commit, state }, idMessage) {
+    commit('removeMessage', idMessage)
   },
 
   addMessage({commit, state}, message) {
