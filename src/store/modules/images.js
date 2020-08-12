@@ -10,7 +10,7 @@ const mutations = {
     for (let index = 0; index < 2; index++) {
       images.push({
         id: '_' + Math.random().toString(36).substr(2, 9),
-        url: 'https://source.unsplash.com/800x800/',
+        url: 'https://source.unsplash.com/200x200/',
         messages: []
       })
     }

@@ -6,7 +6,7 @@
         :key="`item-${i}`"
       >
         <img :src='item.url' alt="">
-        {{ item }}
+        <br>
         <button @click="addMessageToImage(item.id)">
           Add Message
         </button>
