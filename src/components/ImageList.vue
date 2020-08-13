@@ -5,7 +5,10 @@
         v-for="(item, i) in images" 
         :key="`item-${i}`"
       >
-        <img :src='item.url' alt="">
+        <img
+          :src="item.url"
+          alt=""
+        >
         <br>
         <button @click="addMessageToImage(item.id)">
           Add Message
