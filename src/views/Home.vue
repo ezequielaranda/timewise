@@ -1,52 +1,46 @@
 <template>
-  <div class="home">
-    <ImageList />
-    <MessageList />
-    <input
-      v-model="inputText"
-      type="text"
-      placeholder="edit me..."
+  <div>
+    <div 
+      :class="'panel'"
     >
-    <button @click="click">
-      Add Message
-    </button>
+      <p>TimeWise for Chrome</p>
+      <hr>
+      <p>Allow content revision on <strong>canva.com</strong>:</p>
+      <button 
+        @click="onToggle()"
+      >
+        Activate
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import { mapActions } from 'vuex'
-import MessageList from '@/components/MessageList.vue'
-import ImageList from '@/components/ImageList.vue'
+import Vue from 'vue'
 
 export default {
-  name: 'Home',
-  components: {
-    MessageList,
-    ImageList
-  },
-
-  data() {
-    return {
-      inputText: ''
-    }
-  },
-
-  created() {
-    this.setImages()
-  },
-
+  name: 'App',
   methods: {
-    
-    click() {
-      this.addMessage(this.inputText)
+    onToggle(){
+      // Installed "Window State" Chrome App Id
+      const appId = 'hcbhfbnaaancmblfhdknlnojpafjohbi'
+
+      chrome.management.launchApp(appId, () => {
+        if (chrome.runtime.lastError) { 
+          console.error(chrome.runtime.lastError)
+        }
+        else {
+          console.log('App launched')
+        }
+      })
+
     },
-
-    ...mapActions({
-      'addMessage': 'messages/addMessage',
-      'setImages': 'images/setImages'
-
-    })      
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.panel {
+  width: 350px;
+}
+</style>
