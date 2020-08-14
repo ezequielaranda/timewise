@@ -3,13 +3,13 @@ module.exports = {
   outputDir: 'extension/dist',
   runtimeCompiler: true,
   productionSourceMap: false,
-  configureWebpack: {
-    optimization: {
-      splitChunks: false
-    }
-  },
-  css: {
-    extract: false,
-  },
-  filenameHashing: false,
+  // configureWebpack: {
+  //   optimization: {
+  //     splitChunks: false
+  //   }
+  // },
+  // css: {
+  //   extract: false,
+  // },
+  // filenameHashing: false,
 }
