@@ -25,7 +25,7 @@ export default {
       // Installed "Window State" Chrome App Id
       const appId = 'hcbhfbnaaancmblfhdknlnojpafjohbi'
 
-      chrome.management.launchApp(appId, () => {
+      window.chrome.management.launchApp(appId, () => {
         if (chrome.runtime.lastError) { 
           console.error(chrome.runtime.lastError)
         }
