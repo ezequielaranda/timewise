@@ -1,46 +1,21 @@
 <template>
-  <div>
-    <div 
-      :class="'panel'"
+  <div class="home">
+    <img
+      alt="Vue logo"
+      src="../assets/logo.png"
     >
-      <p>TimeWise for Chrome</p>
-      <hr>
-      <p>Allow content revision on <strong>canva.com</strong>:</p>
-      <button 
-        @click="onToggle()"
-      >
-        Activate
-      </button>
-    </div>
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+// @ is an alias to /src
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  methods: {
-    onToggle(){
-      // Installed "Window State" Chrome App Id
-      const appId = 'hcbhfbnaaancmblfhdknlnojpafjohbi'
-
-      window.chrome.management.launchApp(appId, () => {
-        if (chrome.runtime.lastError) { 
-          console.error(chrome.runtime.lastError)
-        }
-        else {
-          console.log('App launched')
-        }
-      })
-
-    },
-  },
+  name: 'Home',
+  components: {
+    HelloWorld
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-.panel {
-  width: 350px;
-}
-</style>
