@@ -25,6 +25,7 @@
 
       <button
         :class="'btn-primary'"
+        @click="onAllowChecked()"
       >
         Go Premium
       </button>
@@ -38,19 +39,8 @@ import Vue from 'vue'
 export default {
   name: 'App',
   methods: {
-    onToggle(){
-      // Installed "Window State" Chrome App Id
-      const appId = 'hcbhfbnaaancmblfhdknlnojpafjohbi'
-
-      chrome.management.launchApp(appId, () => {
-        if (chrome.runtime.lastError) { 
-          console.error(chrome.runtime.lastError)
-        }
-        else {
-          console.log('App launched')
-        }
-      })
-
+    onAllowChecked(){
+      chrome.runtime.sendMessage({message: 'showMarkerTool'})
     },
   },
 }
