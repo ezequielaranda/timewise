@@ -14,5 +14,6 @@ chrome.runtime.onConnect.addListener(function(portFrom) {
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
   //if(activeInfo.tabId === '')
-  chrome.browserAction.setIcon({path:'/icons/icon16.png'})
+  chrome.browserAction.setBadgeBackgroundColor({ color: '#2b3a4b' });
+  chrome.browserAction.setBadgeText({text: ''})
 })

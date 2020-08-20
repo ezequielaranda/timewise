@@ -17,7 +17,7 @@
             :type="'checkbox'"
             :checked="false"
             v-model="isProjectActive"
-            @change="onToggle()"
+            @click="onToggle()"
           >
           <span 
             :class="'slider round'"
@@ -46,13 +46,12 @@ export default {
     this.setIcon()
   },
   methods: {
-    setIcon(){
-      chrome.browserAction.setIcon(
-        { path: this.isProjectActive ? '/icons/icon16.png' : '/icons/notSupported/icon16.png' }
-      )
+    setIconBadge(){
+      chrome.browserAction.setBadgeBackgroundColor({ color: '#2b3a4b' })
+      chrome.browserAction.setBadgeText({text: this.isProjectActive ? '' : 'Off'})
     },
     onToggle(){
-      this.setIcon()
+      this.setIconBadge()
 
       //Send a message to a tab which has your content script injected. 
       chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
