@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   publicPath: '',
   outputDir: 'extension/dist',
@@ -12,4 +14,12 @@ module.exports = {
   //   extract: false,
   // },
   // filenameHashing: false,
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: [
+        path.resolve(__dirname, './src/scss/common.scss'),
+      ],
+    },
+  },
 }
