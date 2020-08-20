@@ -14,10 +14,8 @@
           :class="'switch'"
         >
           <input
+            v-model="isFeedbackActive"
             :type="'checkbox'"
-            :checked="false"
-            v-model="isProjectActive"
-            @click="onToggle()"
           >
           <span 
             :class="'slider round'"
@@ -39,19 +37,34 @@ export default {
   name: 'App',
   data() {
     return {
-      isProjectActive: false,
+      isFeedbackActive: false,
     }
+  },
+  watch: {
+    isFeedbackActive: {
+      handler: 'onToggle',
+    },
   },
   created(){
     this.setIcon()
   },
   methods: {
-    setIconBadge(){
-      chrome.browserAction.setBadgeBackgroundColor({ color: '#2b3a4b' })
-      chrome.browserAction.setBadgeText({text: this.isProjectActive ? '' : 'Off'})
+    setIconBadge(payload){
+      const { color, text } = payload
+
+      chrome.browserAction.setBadgeBackgroundColor({ color })
+      chrome.browserAction.setBadgeText({ text })
     },
     onToggle(){
-      this.setIconBadge()
+      let payload
+      if (!this.isFeedbackActive){
+        payload = { color: '#2b3a4b', text: 'Off' }
+      }
+      else {
+        payload = { color: '#f08640', text: '10+' }
+      }
+      this.setIconBadge(payload)
+
 
       //Send a message to a tab which has your content script injected. 
       chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
