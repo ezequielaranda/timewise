@@ -1,19 +1,18 @@
-// When the extension is installed or upgraded ...
-chrome.runtime.onInstalled.addListener(function() {
-  // Replace all rules ...
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    // With a new rule ...
-    chrome.declarativeContent.onPageChanged.addRules([
-      {
-        // That fires when a page's URL contains a 'g' ...
-        conditions: [
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { urlContains: 'canva.com' },
-          })
-        ],
-        // And shows the extension's page action.
-        actions: [ new chrome.declarativeContent.ShowPageAction() ]
-      }
-    ]);
-  });
+//background script is always running unless extension
+//is disabled
+
+//Wait for some one connect to it
+let contentPort
+chrome.runtime.onConnect.addListener(function(portFrom) {
+   if(portFrom.name === 'background-content') {
+      //This is how you add listener to a port.
+      portFrom.onMessage.addListener(function(message) {
+         //Do something to this message(offsetheight and width)
+      });
+   }
 });
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  //if(activeInfo.tabId === '')
+  chrome.browserAction.setIcon({path:'/icons/icon16.png'})
+})

@@ -11,16 +11,24 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   }, 
-  "page_action": {
+  "browser_action": {
     "default_title": "TimeWise",
     "default_popup": "dist/index.html"
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
+    "tabs",
     "activeTab",
-    "declarativeContent",
     "management"
   ],
+  "content_scripts": [{
+    "matches": [
+        "https://*/*",
+        "http://*/*"
+    ],
+    "js": ["content-script.js"]
+  }],
+  "web_accessible_resources": ["tw-button.html"],
   "background": {
     "scripts": [
       "background.js"
