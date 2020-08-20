@@ -21,6 +21,14 @@
     "activeTab",
     "management"
   ],
+  "content_scripts": [{
+    "matches": [
+        "https://*/*",
+        "http://*/*"
+    ],
+    "js": ["content-script.js"]
+  }],
+  "web_accessible_resources": ["tw-button.html"],
   "background": {
     "scripts": [
       "background.js"
