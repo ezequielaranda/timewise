@@ -61,7 +61,7 @@ export default {
         payload = { color: '#2b3a4b', text: 'Off' }
       }
       else {
-        payload = { color: '#f08640', text: '10+' }
+        payload = { color: '#FF0000', text: '10+' }
       }
       this.setIconBadge(payload)
 
