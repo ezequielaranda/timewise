@@ -16,6 +16,8 @@
           <input
             :type="'checkbox'"
             :checked="false"
+            v-model="isProjectActive"
+            @change="onToggle()"
           >
           <span 
             :class="'slider round'"
@@ -25,7 +27,6 @@
 
       <button
         :class="'btn-primary'"
-        @click="onAllowChecked()"
       >
         Go Premium
       </button>
@@ -34,13 +35,31 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
 export default {
   name: 'App',
+  data() {
+    return {
+      isProjectActive: false,
+    }
+  },
+  created(){
+    this.setIcon()
+  },
   methods: {
-    onAllowChecked(){
-      chrome.runtime.sendMessage({message: 'showMarkerTool'})
+    setIcon(){
+      chrome.browserAction.setIcon(
+        { path: this.isProjectActive ? '/icons/icon16.png' : '/icons/notSupported/icon16.png' }
+      )
+    },
+    onToggle(){
+      this.setIcon()
+
+      //Send a message to a tab which has your content script injected. 
+      chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
+        const currentTabId = tabs[0].id
+
+        chrome.tabs.sendMessage(currentTabId, {action: 'GET_DIMENSION'})
+      })
     },
   },
 }
