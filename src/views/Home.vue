@@ -8,7 +8,7 @@
       <div 
         class="panel"
       >
-        <p>Allow feedback on <strong>canva.com</strong>:</p>
+        <p>Activate feedback feature on <strong>project-name</strong>:</p>
 
         <label 
           :class="'switch'"
