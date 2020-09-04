@@ -19,7 +19,8 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "management"
+    "management",
+    "storage"
   ],
   "content_scripts": [{
     "matches": [
