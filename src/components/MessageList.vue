@@ -30,9 +30,9 @@ export default {
   },
 
   methods: {
-    ...mapActions({
-      'removeMessage': 'messages/removeMessage'
-    })      
+    ...mapActions( 'messages', [
+      'removeMessage'
+    ])      
   },
 
 }

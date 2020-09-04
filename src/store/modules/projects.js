@@ -1,7 +1,16 @@
-import uuidv4 from 'uuid/v4'
+//import uuidv4 from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 
 const state = {
-  allProjects: [],
+  allProjects: [
+    {
+      projectId: uuidv4(),
+      domain: 'canva.com',
+      baseUrl: 'https://www.canva.com/design/DAEAlKQv4Ps/7qkTQuHS5OiJ-J1CgJZYng/view',
+      isActive: true,
+      created: Date.now()
+    }
+  ],
   /*
    {
      projectId: '',
@@ -16,9 +25,7 @@ const state = {
 
 const mutations = {
 
-  setAllProjects (state) {
-    const allProjects = []
-    // fill the array from API
+  setAllProjects (state, allProjects) {
     state.allProjects = allProjects
   },
 
@@ -35,10 +42,10 @@ const mutations = {
     )
   },
 
-  removeProjectById(state, idProject) {
+  removeProjectById(state, projectId) {
     state.allProjects.splice(
       state.allProjects.findIndex(
-        obj => obj.id === idProject
+        obj => obj.id === projectId
       ), 1)
   }
 
@@ -46,8 +53,8 @@ const mutations = {
 
 const actions = {
 
-  removeProjectById({ commit, state }, idProject) {
-    commit('removeProjectById', idProject)
+  removeProjectById({ commit, state }, projectId) {
+    commit('removeProjectById', projectId)
   },
 
   addProject({commit, state}, project) {
@@ -62,7 +69,7 @@ const actions = {
 
 const getters = {
 
-  getActiveProjects({state}) {
+  getActiveProjects(state) {
     return state.allProjects.filter(project => project.isActive)
   }
 

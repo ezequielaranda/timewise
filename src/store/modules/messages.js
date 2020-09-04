@@ -19,10 +19,10 @@ const mutations = {
     )
   },
 
-  removeMessage(state, idMessage) {
+  removeMessage(state, messageId) {
     state.messages.splice(
       state.messages.findIndex(
-        obj => obj.id === idMessage
+        obj => obj.id === messageId
       ),
       1)
   }
@@ -31,8 +31,8 @@ const mutations = {
 
 const actions = {
 
-  removeMessage({ commit, state }, idMessage) {
-    commit('removeMessage', idMessage)
+  removeMessage({ commit, state }, messageId) {
+    commit('removeMessage', messageId)
   },
 
   addMessage({commit, state}, message) {

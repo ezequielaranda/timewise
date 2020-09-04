@@ -1,28 +1,28 @@
 //start connection in content script
 let contentPort = chrome.runtime.connect({
   name: 'background-content'
-});
+})
 
 //Listen for runtime message
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
   //Retrieve offset dimension
-  if(message.action === 'GET_DIMENSION') {
-    contentPort.postMessage({
-      type: 'DIMENSION', 
-      payload: {
-          height: document.body.offsetHeight,
-          width: document.body.offsetWidth       
-      }
-    });
+  if (message.action === 'GET_DIMENSION') {
+    // contentPort.postMessage({
+    //   type: 'DIMENSION', 
+    //   payload: {
+    //     height: document.body.offsetHeight,
+    //     width: document.body.offsetWidth       
+    //   }
+    // })
     toggle()
   }
-});
+})
 
 function toggle(){
   iframe.style.display = (iframe.style.display === "none") ? "block" : "none";
 }
 
-var iframe = document.createElement('iframe');
+var iframe = document.createElement('iframe')
 iframe.height = "110px";
 iframe.width = "110px";
 iframe.style.display = "none";

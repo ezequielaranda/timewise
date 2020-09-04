@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import {mapState, mapGetters} from 'vuex'
 export default {
   name: 'App',
   data() {
@@ -40,21 +41,42 @@ export default {
       isFeedbackActive: false,
     }
   },
+  
+  computed: {
+    ...mapState('projects', [
+      'allProjects'
+    ]),
+    ...mapGetters({
+      'getActiveProjects': 'projects/getActiveProjects'
+    }),
+  },
+
   watch: {
     isFeedbackActive: {
       handler: 'onToggle',
     },
   },
+
   created(){
-    this.setIcon()
+    chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
+      this.isFeedbackActive = this.getActiveProjects.some(
+        (project) => project.baseUrl === tabs[0].url
+      )
+    })
+    
   },
+
+  mounted() {
+    
+  },
+
   methods: {
     setIconBadge(payload){
       const { color, text } = payload
-
       chrome.browserAction.setBadgeBackgroundColor({ color })
       chrome.browserAction.setBadgeText({ text })
     },
+
     onToggle(){
       let payload
       if (!this.isFeedbackActive){
@@ -64,7 +86,6 @@ export default {
         payload = { color: '#FF0000', text: '10+' }
       }
       this.setIconBadge(payload)
-
 
       //Send a message to a tab which has your content script injected. 
       chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
