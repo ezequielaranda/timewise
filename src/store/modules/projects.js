@@ -47,6 +47,13 @@ const mutations = {
       state.allProjects.findIndex(
         obj => obj.id === projectId
       ), 1)
+  },
+
+  removeProjectByUrl(state, projectUrl) {
+    state.allProjects.splice(
+      state.allProjects.findIndex(
+        obj => obj.baseUrl === projectUrl
+      ), 1)
   }
 
 }
@@ -55,6 +62,10 @@ const actions = {
 
   removeProjectById({ commit, state }, projectId) {
     commit('removeProjectById', projectId)
+  },
+
+  removeProjectByUrl({ commit, state }, projectUrl) {
+    commit('removeProjectByUrl', projectUrl)
   },
 
   addProject({commit, state}, project) {

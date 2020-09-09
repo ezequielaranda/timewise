@@ -8,7 +8,7 @@
       <div 
         class="panel"
       >
-        <p>Allow feedback on <strong>canva.com</strong>:</p>
+        <p>Allow feedback on <strong>{{ currentTabUrl }}</strong>:</p>
 
         <label 
           :class="'switch'"
@@ -33,12 +33,13 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 export default {
   name: 'App',
   data() {
     return {
       isFeedbackActive: false,
+      currentTabUrl: ''
     }
   },
   
@@ -59,6 +60,8 @@ export default {
 
   created(){
     chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
+      this.currentTabUrl = tabs[0].title
+      alert(tabs[0])
       this.isFeedbackActive = this.getActiveProjects.some(
         (project) => project.baseUrl === tabs[0].url
       )
@@ -71,6 +74,12 @@ export default {
   },
 
   methods: {
+    
+    ...mapActions({
+      'addProject': 'projects/addProject',
+      'removeProjectByUrl': 'projects/removeProjectByUrl'
+    }),
+        
     setIconBadge(payload){
       const { color, text } = payload
       chrome.browserAction.setBadgeBackgroundColor({ color })
@@ -81,6 +90,12 @@ export default {
       let payload
       if (!this.isFeedbackActive){
         payload = { color: '#2b3a4b', text: 'Off' }
+        /*
+        1) Remover el proyecto de la lista de proyectos activos
+        2) 
+        */
+       
+
       }
       else {
         payload = { color: '#FF0000', text: '10+' }
@@ -89,9 +104,9 @@ export default {
 
       //Send a message to a tab which has your content script injected. 
       chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
-        const currentTabId = tabs[0].id
+        //const currentTabId = tabs[0].id
 
-        chrome.tabs.sendMessage(currentTabId, {action: 'GET_DIMENSION'})
+        chrome.tabs.sendMessage(tabs[0].id, {action: 'GET_DIMENSION'})
       })
     },
   },
