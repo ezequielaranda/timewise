@@ -44,6 +44,6 @@ const router = new VueRouter({
 })
 
 // setting nav guards
-router.beforeEach(requiresRegisteredDomainGuard)
+//router.beforeEach(requiresRegisteredDomainGuard)
 
 export default router

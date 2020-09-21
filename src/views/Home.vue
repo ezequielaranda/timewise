@@ -28,14 +28,20 @@
       >
         Go Premium
       </button>
+      <ProjectList />
     </div>
   </div>
 </template>
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
+import ProjectList from '@/components/projects/ProjectList.vue' 
+import axios from 'axios'
 export default {
   name: 'App',
+  components: {
+    ProjectList
+  },
   data() {
     return {
       isFeedbackActive: false,
@@ -49,7 +55,7 @@ export default {
     ]),
     ...mapGetters({
       'getActiveProjects': 'projects/getActiveProjects'
-    }),
+    })
   },
 
   watch: {
@@ -59,25 +65,26 @@ export default {
   },
 
   created(){
-    chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
-      this.currentTabUrl = tabs[0].title
-      alert(tabs[0])
-      this.isFeedbackActive = this.getActiveProjects.some(
-        (project) => project.baseUrl === tabs[0].url
-      )
-    })
+    // chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
+    //   this.currentTabUrl = tabs[0].title
+    //   alert(tabs[0])
+    //   this.isFeedbackActive = this.getActiveProjects.some(
+    //     (project) => project.baseUrl === tabs[0].url
+    //   )
+    // })
     
   },
 
   mounted() {
-    
+    this.fetchProjects()
   },
 
   methods: {
     
     ...mapActions({
       'addProject': 'projects/addProject',
-      'removeProjectByUrl': 'projects/removeProjectByUrl'
+      'removeProjectByUrl': 'projects/removeProjectByUrl',
+      'fetchProjects': 'projects/fetchProjects'
     }),
         
     setIconBadge(payload){
@@ -195,4 +202,12 @@ input:checked + .slider:before {
   border: 1px solid #f08640;
   color: whitesmoke;
 }
+
+.line {
+  width: 212px;
+  height: 17px;
+  border-bottom: 1px solid black;
+  
+}
+
 </style>

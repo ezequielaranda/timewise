@@ -1,5 +1,6 @@
 //import uuidv4 from 'uuid/v4'
 import { v4 as uuidv4 } from 'uuid'
+import { fetchProjects } from '@/services/projects.js'
 
 const state = {
   allProjects: [
@@ -8,7 +9,8 @@ const state = {
       domain: 'canva.com',
       baseUrl: 'https://www.canva.com/design/DAEAlKQv4Ps/7qkTQuHS5OiJ-J1CgJZYng/view',
       isActive: true,
-      created: Date.now()
+      createdAt: Date.now(),
+      name: 'Proyecto de Prueba'
     }
   ],
   /*
@@ -75,6 +77,21 @@ const actions = {
   setProjects({ commit, state }) {
     commit('setProjects')
   },
+
+  async fetchProjects({state, commit}) {
+    try {
+      const response = await fetchProjects()
+      if (response.data) {
+        console.log(response.data)
+        commit('setAllProjects', response.data)
+        return response.data
+      }
+    }
+    catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
 
 }
 
