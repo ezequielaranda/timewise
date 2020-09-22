@@ -1,7 +1,8 @@
 <template>
   <div>
+    <br>
     <ul id="example-1">
-      <li 
+      <li
         v-for="(item, i) in allProjects" 
         :key="`item-${i}`"
       >

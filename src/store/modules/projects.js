@@ -44,6 +44,11 @@ const mutations = {
     )
   },
 
+  editProject(state, project) {
+    const index = state.allProjects.map(o => o.projectId).indexOf(project.projectId)
+    state.allProjects.splice(index, 1, project)
+  },
+  
   removeProjectById(state, projectId) {
     state.allProjects.splice(
       state.allProjects.findIndex(
@@ -62,6 +67,10 @@ const mutations = {
 
 const actions = {
 
+  editProject({ commit, state }, project) {
+    commit('editProject', project)
+  },
+  
   removeProjectById({ commit, state }, projectId) {
     commit('removeProjectById', projectId)
   },
