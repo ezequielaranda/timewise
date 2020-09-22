@@ -52,7 +52,7 @@ const mutations = {
   removeProjectById(state, projectId) {
     state.allProjects.splice(
       state.allProjects.findIndex(
-        obj => obj.id === projectId
+        obj => obj.projectId === projectId
       ), 1)
   },
 

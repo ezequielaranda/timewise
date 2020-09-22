@@ -196,6 +196,7 @@ input:checked + .slider:before {
 }
 
 .btn-primary {
+  width: 350px;
   font-size: 14px;
   height:30px;
   background-color: #f08640;

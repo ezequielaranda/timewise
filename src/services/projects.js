@@ -12,7 +12,7 @@ const payloadProject = {
     createdAt: 'date|UNIX',
     baseURL: 'internetDomain',
     domain: 'internetUrl',
-    _repeat: 300
+    _repeat: 5
   }
 }
 

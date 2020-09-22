@@ -1,5 +1,9 @@
 <template>
-  <button @click="disable">Disable</button>
+  <button
+    @click="disable"
+  >
+    Disable
+  </button>
 </template>
 
 <script>

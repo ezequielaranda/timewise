@@ -1,8 +1,15 @@
 <template>
   <div>
-    <a>{{ project.name }}</a> | 
+    <p>{{ project.name }}</p> 
     <RemoveButton @remove="removeProject" /> --
-    <DisableButton @disable="disableProject" />
+    <DisableButton 
+      v-show="project.isActive"
+      @disable="toggleIsActive"
+    />
+    <EnableButton 
+      v-show="!project.isActive"
+      @enable="toggleIsActive"
+    />
   </div>
 </template>
 
@@ -10,11 +17,13 @@
 import { mapActions } from 'vuex'
 import RemoveButton from '@/components/ui/RemoveButton.vue'
 import DisableButton from '@/components/ui/DisableButton.vue'
+import EnableButton from '@/components/ui/EnableButton.vue'
 export default {
   name: 'ProjectItem',
   components: {
     DisableButton,
-    RemoveButton
+    RemoveButton,
+    EnableButton
   },
   props: {
     project: {
@@ -30,13 +39,13 @@ export default {
       
     }),
 
-    disableProject() {
+    toggleIsActive() {
+      console.log(this.project.isActive)
       this.project.isActive = !this.project.isActive
       this.editProject(this.project)
     },
 
     removeProject() {
-      console.log(this.project.projectId)
       this.removeProjectById(this.project.projectId)
     }
   }
@@ -45,5 +54,7 @@ export default {
 
 
 <style>
-
+ a {
+   width: 350px;
+ }
 </style>

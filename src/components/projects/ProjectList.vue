@@ -42,3 +42,20 @@ export default {
 
 }
 </script>
+
+<style>
+
+ul {
+  width: 312px;
+  list-style-position: outside;
+}
+
+li {
+  padding: 1px 10px;
+  margin: 2px;
+  background-color: #EEEEEE;
+  border: 5px solid #eba742;
+  font-family: "Lucida Console", Courier, monospace;
+}
+
+</style>
