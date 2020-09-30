@@ -1,15 +1,22 @@
 <template>
-  <div>
-    <br>
-    <ul id="example-1">
+  <div
+    v-if="!loading"
+  >
+    <ul
+      id="example-1"
+    >
       <li
         v-for="(item, i) in allProjects" 
         :key="`item-${i}`"
       >
         <ProjectItem :project="item" />
-        <br>
       </li>
     </ul>
+  </div>
+  <div
+    v-else
+  >
+    Loading...
   </div>
 </template>
 
@@ -25,7 +32,12 @@ export default {
   name: 'ProjectList',
   components: {
     ProjectItem
+  },
 
+  data() {
+    return {
+      loading: true
+    }
   },
 
   computed: {
@@ -34,20 +46,26 @@ export default {
     ]),
   },
 
+  mounted() {
+    this.loading = true
+    this.fetchProjects()
+    this.loading = false
+  },
+
   methods: {
     ...mapActions({
       // 'addMessageToImage': 'images/addMessageToImage'
+      'fetchProjects': 'projects/fetchProjects'
     })      
   },
 
 }
 </script>
 
-<style>
+<style  scoped>
 
 ul {
   width: 312px;
-  list-style-position: outside;
 }
 
 li {

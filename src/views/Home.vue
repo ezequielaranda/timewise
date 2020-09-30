@@ -28,19 +28,19 @@
       >
         Go Premium
       </button>
-      <ProjectList />
+      <CurrentProjects />
     </div>
   </div>
 </template>
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import ProjectList from '@/components/projects/ProjectList.vue' 
+import CurrentProjects from '@/views/CurrentProjects.vue' 
 import axios from 'axios'
 export default {
   name: 'App',
   components: {
-    ProjectList
+    CurrentProjects
   },
   data() {
     return {
@@ -76,15 +76,14 @@ export default {
   },
 
   mounted() {
-    this.fetchProjects()
+    //this.fetchProjects()
   },
 
   methods: {
     
     ...mapActions({
       'addProject': 'projects/addProject',
-      'removeProjectByUrl': 'projects/removeProjectByUrl',
-      'fetchProjects': 'projects/fetchProjects'
+      'removeProjectByUrl': 'projects/removeProjectByUrl'
     }),
         
     setIconBadge(payload){

@@ -1,7 +1,10 @@
 <template>
   <div>
     <p>{{ project.name }}</p> 
-    <RemoveButton @remove="removeProject" /> --
+    <RemoveButton 
+      v-show="project.isActive"
+      @remove="removeProject"
+    />
     <DisableButton 
       v-show="project.isActive"
       @disable="toggleIsActive"
@@ -54,7 +57,5 @@ export default {
 
 
 <style>
- a {
-   width: 350px;
- }
+
 </style>
