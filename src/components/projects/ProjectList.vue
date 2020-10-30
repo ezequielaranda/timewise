@@ -6,7 +6,7 @@
       id="example-1"
     >
       <li
-        v-for="(item, i) in allProjects" 
+        v-for="(item, i) in projectlist" 
         :key="`item-${i}`"
       >
         <ProjectItem :project="item" />
@@ -16,12 +16,9 @@
   <div
     v-else
   >
-    Loading...
+    Loading Projects...
   </div>
 </template>
-
-
-
 <script>
 
 import {mapState, mapActions} from 'vuex'
@@ -34,29 +31,17 @@ export default {
     ProjectItem
   },
 
+  props: {
+    projectlist: {
+      type: Array,
+      default: null
+    },
+  },
+
   data() {
     return {
-      loading: true
+      loading: false
     }
-  },
-
-  computed: {
-    ...mapState('projects', [
-      'allProjects'
-    ]),
-  },
-
-  mounted() {
-    this.loading = true
-    this.fetchProjects()
-    this.loading = false
-  },
-
-  methods: {
-    ...mapActions({
-      // 'addMessageToImage': 'images/addMessageToImage'
-      'fetchProjects': 'projects/fetchProjects'
-    })      
   },
 
 }
@@ -73,7 +58,7 @@ li {
   margin: 2px;
   background-color: #EEEEEE;
   border: 5px solid #eba742;
-  font-family: "Lucida Console", Courier, monospace;
+  
 }
 
 </style>

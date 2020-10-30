@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div 
+    <!--div 
       :class="'container'"
     >
       <p><strong>TimeWise</strong> for Chrome</p>
@@ -27,20 +27,24 @@
         :class="'btn-primary'"
       >
         Go Premium
-      </button>
-      <CurrentProjects />
-    </div>
+      </button-->
+    <h1>{{ currentProject.name }}</h1>  
+    <LastMessages />
+    <CurrentProjects />
   </div>
+  <!--/div-->
 </template>
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import CurrentProjects from '@/views/CurrentProjects.vue' 
+import CurrentProjects from '@/views/CurrentProjects.vue'
+import LastMessages from '@/views/LastMessages.vue'  
 import axios from 'axios'
 export default {
   name: 'App',
   components: {
-    CurrentProjects
+    CurrentProjects,
+    LastMessages
   },
   data() {
     return {
@@ -51,7 +55,8 @@ export default {
   
   computed: {
     ...mapState('projects', [
-      'allProjects'
+      'allProjects',
+      'currentProject'
     ]),
     ...mapGetters({
       'getActiveProjects': 'projects/getActiveProjects'
@@ -65,6 +70,7 @@ export default {
   },
 
   created(){
+    
     // chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
     //   this.currentTabUrl = tabs[0].title
     //   alert(tabs[0])
@@ -75,15 +81,21 @@ export default {
     
   },
 
-  mounted() {
-    //this.fetchProjects()
+  async mounted() {
+    
+    await this.fetchMessages()
+    await this.fetchUsers()
+    await this.fetchProjects()
   },
 
   methods: {
     
     ...mapActions({
       'addProject': 'projects/addProject',
-      'removeProjectByUrl': 'projects/removeProjectByUrl'
+      'removeProjectByUrl': 'projects/removeProjectByUrl',
+      'fetchMessages': 'messages/fetchMessages',
+      'fetchUsers': 'users/fetchUsers',
+      'fetchProjects': 'projects/fetchProjects'
     }),
         
     setIconBadge(payload){

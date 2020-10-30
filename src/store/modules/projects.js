@@ -2,17 +2,19 @@
 import { v4 as uuidv4 } from 'uuid'
 import { fetchProjects } from '@/services/projects.js'
 
+
 const state = {
-  allProjects: [
-    {
-      projectId: uuidv4(),
-      domain: 'canva.com',
-      baseUrl: 'https://www.canva.com/design/DAEAlKQv4Ps/7qkTQuHS5OiJ-J1CgJZYng/view',
-      isActive: true,
-      createdAt: Date.now(),
-      name: 'Proyecto de Prueba'
-    }
-  ],
+  allProjects: [],
+
+  currentProject: {
+    projectId: '7b73851c-1a5b-4766-8699-419db023f140',
+    domain: 'canva.com',
+    baseUrl: 'https://www.canva.com/design/DAD-yhsn0Iw/kAGn3K2rIoa5knOGZvz6DA/view',
+    isActive: true,
+    createdAt: '2020-07-07T07:22Z',
+    name: 'Proyecto de Prueba_2',
+    ownerId:'0002'
+  },
   /*
    {
      projectId: '',
@@ -90,10 +92,10 @@ const actions = {
   async fetchProjects({state, commit}) {
     try {
       const response = await fetchProjects()
-      if (response.data) {
-        console.log(response.data)
-        commit('setAllProjects', response.data)
-        return response.data
+      // const response = allProjects
+      if (response) {
+        commit('setAllProjects', response)
+        return response
       }
     }
     catch (error) {
@@ -108,6 +110,18 @@ const getters = {
 
   getActiveProjects(state) {
     return state.allProjects.filter(project => project.isActive)
+  },
+
+  getActiveProjectsByUserId: (state) => (userId) => {
+    return state.allProjects.filter(project => 
+      (project.isActive && 
+       project.ownerId === userId &&
+       project.projectId !== state.currentProject.projectId)
+    )
+  },
+
+  getCurrentProject(state) {
+    return state.currentProject
   }
 
 }

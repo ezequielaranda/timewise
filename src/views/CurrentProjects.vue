@@ -3,18 +3,37 @@
     <p 
       class="title"
     >
-      <strong>Your Projects</strong>
+      Your other projects...
     </p>
-    <ProjectList />
+    <ProjectList :projectlist="projectList" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ProjectList from '@/components/projects/ProjectList.vue'
 export default {
   name: 'CurrentProjects',
   components: {
     ProjectList
+  },
+
+  data() {
+    return {
+      loading: true,
+      projectList: []
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      'getCurrentUser': 'users/getCurrentUser',
+      'getActiveProjectsByUserId': 'projects/getActiveProjectsByUserId'
+    }),
+  },
+
+  mounted() {
+    this.projectList = this.getActiveProjectsByUserId(this.getCurrentUser.userId)
   },
 
 }

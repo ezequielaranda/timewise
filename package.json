@@ -10,12 +10,15 @@
     "lint-fix_serve": "vue-cli-service lint --fix && vue-cli-service serve"
   },
   "dependencies": {
+    "apollo-boost": "^0.4.9",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "graphql": "^15.4.0",
     "moment": "^2.29.0",
     "uuid": "^8.3.0",
     "uuidv4": "^6.2.3",
     "vue": "^2.6.11",
+    "vue-apollo": "^3.0.5",
     "vue-awesome": "^4.1.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
